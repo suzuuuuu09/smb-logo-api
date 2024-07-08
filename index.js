@@ -1,6 +1,7 @@
-// app/page.js
-import ImageCreator from '../image';
+// index.js
+import { ImageCreator } from './image';
 import path from 'path';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const fontPath = path.join(process.cwd(), 'public/fonts/SuperPlumberBrothers.ttf');
 const fontFamily = 'Super Plumber Brothers';
@@ -10,7 +11,7 @@ const rightImagePath = path.join(process.cwd(), 'public/images/FrameRight.png');
 
 const imageCreator = new ImageCreator(fontPath, fontFamily, leftImagePath, centerImagePath, rightImagePath);
 
-export default async function handler(req, res) {
+export default async function handler(req = NextApiRequest, res = NextApiResponse) {
   const { top, bottom, shade } = req.query;
 
   if (!top || !bottom) {
